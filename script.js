@@ -108,8 +108,13 @@ function deleteAlarm(event) {
 function updateTime() {
   let date = new Date();
 
-  let hours = date.getHours() - 12;
-  if (hours < 0) hours *= -1;
+  let hours = date.getHours();
+  if (hours > 12) {
+    hours -= 12;
+  }
+  if (hours == 0) {
+    hours = 12;
+  }
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
 

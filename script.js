@@ -67,8 +67,25 @@ function addListItemToAlarmList() {
   // Create LI
   const newAlarm = document.createElement("li");
   let alarmTimeAsString = alarmInput.value;
+  const nums = alarmTimeAsString.split(":");
+  console.log(nums);
+  let hrs = parseInt(nums[0]);
+  let mins = parseInt(nums[1]);
+  let secs = parseInt(nums[2]);
 
-  newAlarm.innerText = alarmTimeAsString;
+  if (hrs > 12) {
+    hrs -= 12;
+  }
+  if (hrs == 0) {
+    hrs = 12;
+  }
+
+  let amOrpm = hrs < 12 ? "AM" : "PM";
+
+  mins = mins < 10 ? "0" + mins : mins;
+  secs = secs < 10 ? "0" + secs : secs;
+
+  newAlarm.innerText = `${hrs} : ${mins} : ${secs} ${amOrpm}`;
   newAlarm.classList.add("alarm-item");
   // append li to alarm div
   alarmDiv.appendChild(newAlarm);

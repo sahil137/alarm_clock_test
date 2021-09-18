@@ -11,7 +11,10 @@ const alarmList = document.getElementById("alarm-list");
 // Event Listeners
 
 setAlarmButton.addEventListener("click", setAlarm);
+alarmList.addEventListener("click", deleteAlarm);
 
+// Variables
+var timoutId = 0;
 // Functions
 
 function setAlarm(event) {
@@ -41,16 +44,15 @@ function setAlarm(event) {
 
   const differenceInTime = alarmInputAsNumber - totalTimeInMilliseconds;
 
-  let id;
   // diff is less than 0 it means the alarm will ring the next day
   if (differenceInTime <= 0) {
     const alarmTimeForNextDay =
       NumberOfMillisecondsInOneDay -
       alarmInputAsNumber +
       totalTimeInMilliseconds;
-    id = setTimeout(initializeAlarm, alarmTimeForNextDay);
+    timeOutId = setTimeout(ringAlarm, alarmTimeForNextDay);
   } else {
-    id = setTimeout(initializeAlarm, differenceInTime);
+    timoutId = setTimeout(ringAlarm, differenceInTime);
   }
 
   // add alarm to alarm list
@@ -66,12 +68,12 @@ function addListItemToAlarmList() {
   const newAlarm = document.createElement("li");
   let alarmTimeAsString = alarmInput.value;
 
-  newAlarm.innerText = "Random";
+  newAlarm.innerText = alarmTimeAsString;
   newAlarm.classList.add("alarm-item");
   // append li to alarm div
   alarmDiv.appendChild(newAlarm);
 
-  // Delete Button
+  // add Delete Button
   const deleteButton = document.createElement("button");
   deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
   deleteButton.classList.add("delete-button");
@@ -82,14 +84,32 @@ function addListItemToAlarmList() {
   alarmList.appendChild(alarmDiv);
 }
 
-function initializeAlarm() {
+function ringAlarm() {
   alert("The Alarm is going off");
 }
 
+// removes alarm from list and removes the timeout
+function deleteAlarm(event) {
+  console.log(event.target);
+  const item = event.target;
+  if (item.classList[0] === "delete-button") {
+    const alarm = item.parentElement;
+    // add animation
+    alarm.classList.add("drop");
+    // will execute function when transition ends
+    alarm.addEventListener("transitionend", () => {
+      alarm.remove();
+    });
+  }
+  clearTimeout(timoutId);
+}
+
+// function which runs the clock
 function updateTime() {
   let date = new Date();
 
   let hours = date.getHours() - 12;
+  if (hours < 0) hours *= -1;
   let minutes = date.getMinutes();
   let seconds = date.getSeconds();
 

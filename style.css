@@ -2,6 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -24,13 +25,13 @@ main {
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  border: 1px solid black;
+  border-top: 1px solid black;
 }
 
 .alarm-clock-container {
   height: 600px;
   width: 500px;
-  border: 1px solid rgb(0, 0, 0);
+  /* border: 1px solid rgb(0, 0, 0); */
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -45,6 +46,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 1px solid black;
 }
 
 #time {
@@ -56,7 +58,7 @@ main {
 
 /* Styles for alarm input */
 .alarm-input-container {
-  /* border: 1px solid black; */
+  border-bottom: 1px solid black;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -74,6 +76,46 @@ main {
 #alarm-time {
   width: 120px;
   outline: none;
+}
+
+/* Alarm List Styles */
+
+.alarm-list-container {
+  height: 450px;
+}
+
+#alarm-list {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  overflow-y: scroll;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid blue; */
+}
+
+.alarm {
+  margin: 0.5rem;
+  padding: 10px;
+  /* background: rgb(197, 187, 178); */
+  background: transparent;
+  color: black;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 97%;
+}
+
+.alarm:hover {
+  background-color: rgb(210, 230, 247);
+  cursor: pointer;
+}
+
+.alarm-item {
+  min-width: 30%;
+  list-style: none;
 }
 
 /* Buttons */
@@ -104,4 +146,24 @@ main {
   background-color: transparent;
   border: 1px solid purple;
   color: purple;
+}
+
+.delete-button {
+  background: red;
+  color: white;
+  width: 60px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.delete-button:hover {
+  background: rgb(240, 6, 6);
 }

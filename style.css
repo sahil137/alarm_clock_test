@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: linear-gradient(to bottom left, #accbee 0%, #e7f0fd 100%);
+  height: 100vh;
+}
+header {
+  min-height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.7rem;
+}
+main {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+.alarm-clock-container {
+  height: 600px;
+  width: 500px;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  background-color: aliceblue;
+}
+
+/* Styles for Clock */
+.clock-container {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#time {
+  font-size: 2rem;
+  font-weight: 600;
+  color: purple;
+  margin: auto;
+}
+
+/* Styles for alarm input */
+.alarm-input-container {
+  /* border: 1px solid black; */
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.alarm-input-container form {
+  width: 300px;
+  height: 50px;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#alarm-time {
+  width: 120px;
+  outline: none;
+}
+
+/* Buttons */
+
+.alarm-input-container button {
+  letter-spacing: 0.5px;
+  height: 2.2rem;
+  width: 6rem;
+  padding: 5px;
+  color: white;
+  font-weight: bolder;
+  background-color: purple;
+  border: none;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+
+.alarm-input-container button:hover {
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid purple;
+  color: purple;
+}

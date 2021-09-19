@@ -1,6 +1,6 @@
 # Alarm Clock
 
-A simple alarm clock that lets the user set alarms and delete them. All the alarms are shown in a list. [click here to visit app].
+A simple alarm clock that lets the user set alarms and delete them. All the alarms are shown in a list. [click here to visit app](https://sahil137.github.io/alarm_clock_test/).
 
 ## App Interface
 

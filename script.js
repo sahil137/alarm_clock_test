@@ -14,7 +14,8 @@ setAlarmButton.addEventListener("click", setAlarm);
 alarmList.addEventListener("click", deleteAlarm);
 
 // Variables
-var timoutId = 0;
+var timeoutId = {};
+var alarmListLength = 0;
 // Functions
 
 function setAlarm(event) {
@@ -23,7 +24,8 @@ function setAlarm(event) {
 
   // Main functionality of set alarm
   let alarmInputAsNumber = alarmInput.valueAsNumber;
-  console.log(alarmInputAsNumber);
+
+  // to check if input is empty
   if (isNaN(alarmInputAsNumber)) {
     alert("Please Enter a valid time");
     return;
@@ -43,16 +45,16 @@ function setAlarm(event) {
     hoursInMilliseconds + minutesInMilliseconds + secondsInMilliseconds;
 
   const differenceInTime = alarmInputAsNumber - totalTimeInMilliseconds;
-
+  alarmListLength += 1;
   // diff is less than 0 it means the alarm will ring the next day
   if (differenceInTime <= 0) {
     const alarmTimeForNextDay =
       NumberOfMillisecondsInOneDay -
       alarmInputAsNumber +
       totalTimeInMilliseconds;
-    timeOutId = setTimeout(ringAlarm, alarmTimeForNextDay);
+    timeoutId[alarmListLength] = setTimeout(ringAlarm, alarmTimeForNextDay);
   } else {
-    timoutId = setTimeout(ringAlarm, differenceInTime);
+    timeoutId[alarmListLength] = setTimeout(ringAlarm, differenceInTime);
   }
 
   // add alarm to alarm list
@@ -63,15 +65,16 @@ function addListItemToAlarmList() {
   // create div
   const alarmDiv = document.createElement("div");
   alarmDiv.classList.add("alarm");
-
+  alarmDiv.id = alarmListLength;
   // Create LI
   const newAlarm = document.createElement("li");
   let alarmTimeAsString = alarmInput.value;
   const nums = alarmTimeAsString.split(":");
-  console.log(nums);
+
   let hrs = parseInt(nums[0]);
   let mins = parseInt(nums[1]);
   let secs = parseInt(nums[2]);
+  let amOrpm = hrs < 12 ? "AM" : "PM";
 
   if (hrs > 12) {
     hrs -= 12;
@@ -79,8 +82,6 @@ function addListItemToAlarmList() {
   if (hrs == 0) {
     hrs = 12;
   }
-
-  let amOrpm = hrs < 12 ? "AM" : "PM";
 
   mins = mins < 10 ? "0" + mins : mins;
   secs = secs < 10 ? "0" + secs : secs;
@@ -107,10 +108,13 @@ function ringAlarm() {
 
 // removes alarm from list and removes the timeout
 function deleteAlarm(event) {
-  console.log(event.target);
   const item = event.target;
   if (item.classList[0] === "delete-button") {
     const alarm = item.parentElement;
+    const id = parseInt(alarm.id);
+    // clear timeout with id of alarm
+    clearTimeout(timeoutId[id]);
+    alarmListLength -= 1;
     // add animation
     alarm.classList.add("drop");
     // will execute function when transition ends
@@ -118,7 +122,6 @@ function deleteAlarm(event) {
       alarm.remove();
     });
   }
-  clearTimeout(timoutId);
 }
 
 // function which runs the clock
